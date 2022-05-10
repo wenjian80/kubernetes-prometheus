@@ -2,15 +2,25 @@
 
 
 kubectl create namespace monitoring
+
 kubectl create -f clusterRole.yaml
+
 kubectl create -f config-map.yaml
+
 kubectl create -f pvc-storageclass.yaml --namespace=monitoring
+
 kubectl create -f pvc.yaml --namespace=monitoring
+
 k get pvc -A
+
 kubectl create  -f prometheus-deployment.yaml 
+
 k get deployment -n monitoring
+
 kubectl get deployments --namespace=monitoring
+
 kubectl create -f prometheus-service.yaml --namespace=monitoring
+
 k get all -A
 
 
