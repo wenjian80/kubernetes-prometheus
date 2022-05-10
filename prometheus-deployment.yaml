@@ -29,12 +29,12 @@ spec:
             - name: prometheus-storage-volume
               mountPath: /prometheus/
       initContainers:
-      - name: prometheus-data-permission-fix
-        image: busybox
-        command: ["/bin/chmod","-R","777", "/prometheus"]
-        volumeMounts:
-        - name: prometheus-storage-volume
-          mountPath: /data
+        - name: prometheus-data-permission-fix
+          image: busybox
+          command: ["/bin/chmod","-R","777", "/data"]
+          volumeMounts:
+          - name: prometheus-storage-volume
+            mountPath: /data
       volumes:
         - name: prometheus-config-volume
           configMap:
