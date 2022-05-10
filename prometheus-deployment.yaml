@@ -28,13 +28,20 @@ spec:
               mountPath: /etc/prometheus/
             - name: prometheus-storage-volume
               mountPath: /prometheus/
+      initContainers:
+      - name: prometheus-data-permission-fix
+        image: busybox
+        command: ["/bin/chmod","-R","777", "/prometheus"]
+        volumeMounts:
+        - name: prometheus-storage-volume
+          mountPath: /data
       volumes:
         - name: prometheus-config-volume
           configMap:
             defaultMode: 420
             name: prometheus-server-conf
   
-        - name: prometheus-storage-volume          
+        - name: prometheus-storage-volume
           persistentVolumeClaim:
             claimName: prometheuspvc
 #          emptyDir: {}
